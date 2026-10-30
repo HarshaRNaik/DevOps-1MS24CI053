@@ -1,0 +1,15 @@
+[Unit]
+Description=Quote API Spring Boot service
+After=network.target
+
+[Service]
+Type=simple
+User=quote-api
+Group=quote-api
+WorkingDirectory=/opt/quote-api
+ExecStart=/usr/bin/java -jar /opt/quote-api/quote-api.jar --server.port={{ quote_api_port }}
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

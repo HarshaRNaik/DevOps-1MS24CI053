@@ -1,0 +1,7 @@
+.git
+.vscode
+target
+ansible
+k8s
+REPORT.md
+SCREENSHOT-CHECKLIST.md
