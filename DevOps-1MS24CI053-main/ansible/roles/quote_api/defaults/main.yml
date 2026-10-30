@@ -1,0 +1,4 @@
+---
+quote_api_port: 8080
+quote_api_java_package: default-jre-headless
+quote_api_jar_source: "{{ playbook_dir }}/../target/quote-api.jar"

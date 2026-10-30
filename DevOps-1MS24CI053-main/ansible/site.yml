@@ -1,0 +1,6 @@
+---
+- name: Deploy Quote API to the local Ubuntu system
+  hosts: quote_api_host
+  become: true
+  roles:
+    - quote_api

@@ -1,0 +1,60 @@
+---
+- name: Install Java runtime
+  ansible.builtin.apt:
+    name: "{{ quote_api_java_package }}"
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Create the Quote API system user
+  ansible.builtin.user:
+    name: quote-api
+    system: true
+    create_home: false
+    shell: /usr/sbin/nologin
+
+- name: Create the application directory
+  ansible.builtin.file:
+    path: /opt/quote-api
+    state: directory
+    owner: quote-api
+    group: quote-api
+    mode: "0755"
+
+- name: Install the packaged application
+  ansible.builtin.copy:
+    src: "{{ quote_api_jar_source }}"
+    dest: /opt/quote-api/quote-api.jar
+    owner: quote-api
+    group: quote-api
+    mode: "0644"
+  notify: Restart Quote API
+
+- name: Install the systemd unit
+  ansible.builtin.template:
+    src: quote-api.service.j2
+    dest: /etc/systemd/system/quote-api.service
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart Quote API
+
+- name: Reload systemd unit definitions
+  ansible.builtin.systemd_service:
+    daemon_reload: true
+
+- name: Enable and start Quote API
+  ansible.builtin.systemd_service:
+    name: quote-api
+    enabled: true
+    state: started
+
+- name: Verify the local health endpoint
+  ansible.builtin.uri:
+    url: "http://127.0.0.1:{{ quote_api_port }}/health"
+    status_code: 200
+    return_content: true
+  register: quote_api_health
+  retries: 12
+  delay: 5
+  until: quote_api_health.status == 200
