@@ -30,7 +30,7 @@ The objective is to demonstrate a repeatable path from source code to build, tes
 | Java | OpenJDK 24.0.2 on Windows; project bytecode target is Java 21 |
 | Maven | Not installed globally; Maven Wrapper 3.9.11 is included |
 | Git | Git for Windows 2.54.0; configured remote is `https://github.com/HarshaRNaik/DevOps-1MS24CI053.git` |
-| Git history | Remote `main` was fetched at `abb7ed080df90faedc804c124a5e2c11aca536c7`; local `main` has no commits and the project is an untracked nested folder |
+| Git history | Local `main` contains merge commit `a962cf8` integrating `feature/devops-rubric` (`15340e2`); these two commits are ahead of `origin/main` and still need to be pushed for remote evidence |
 | WSL Java / Ansible | Not installed in Ubuntu; Ansible playbook has not run |
 | Docker Desktop / CLI | Docker command unavailable; image/container execution remains unverified |
 | Jenkins | Not yet configured or run |
@@ -85,7 +85,7 @@ Verified locally: Maven Wrapper generation succeeded, `.\mvnw.cmd clean package`
 
 ### 8.1 Component 1 — CI Pipeline results
 
-**Figure 1. Git branches, commits, and merge history.** Screenshot file: `report/screenshots/C1-01-git-history.png` — pending. The fetched GitHub `main` history contains prior feature and contributing merges, but only `main` currently exists as a remote branch. The current local assignment changes are not in that history.
+**Figure 1. Git branches, commits, and merge history.** Screenshot file: `report/screenshots/C1-01-git-history.png` — pending. Local `main` now contains merge commit `a962cf8` from `feature/devops-rubric` (`15340e2`). These commits have not been pushed to GitHub; push and capture the remote branch/merge history before claiming remote evidence.
 
 **Figure 2. Jenkins job configuration.** Screenshot file: `report/screenshots/C1-02-jenkins-config.png` — blocked; Jenkins is unavailable and no job has been configured.
 
@@ -93,7 +93,7 @@ Verified locally: Maven Wrapper generation succeeded, `.\mvnw.cmd clean package`
 
 **Figure 4. Archived artifact on a successful Jenkins build.** Screenshot file: `report/screenshots/C1-04-artifact.png` — blocked; no Jenkins artifact has been archived.
 
-**Figure 5. CI enhancement — passing tests or commit-versioned artifact.** Screenshot file: `report/screenshots/C1-05-ci-enhancement.png` — pending. All three Maven tests passed locally and the pipeline defines commit-SHA artifact naming, but there is no screenshot and no Jenkins verification.
+**Figure 5. CI enhancement — passing tests or commit-versioned artifact.** Screenshot file: `report/screenshots/C1-05-ci-enhancement.png` — pending. All three Maven tests passed locally. Jenkins defines commit-SHA artifact naming, and `.github/workflows/ci.yml` runs build/tests on push and pull request and uploads a SHA-named artifact. The workflow has not yet run on GitHub; capture a successful Actions run before claiming runtime verification.
 
 ### 8.2 Component 2 — Ansible, Docker and Kubernetes results
 
@@ -131,5 +131,5 @@ The application and Maven test/package flow are verified. CI, Docker, Ansible, a
 - Replace all title-page placeholders and use the college certificate template.
 - Add genuine screenshots and observed outputs; do not submit unverified claims.
 - Confirm the repository contains the intended final changes and branch/merge history.
-- Do not push from the current nested/untracked workspace: first align the working tree to the fetched repository root so changes are committed at the correct paths.
+- Push the local `main` and `feature/devops-rubric` branches to `origin` so the feature commit and merge are visible on the remote, then capture genuine GitHub and Actions evidence.
 - Add the course coordinator as a GitHub collaborator if required.

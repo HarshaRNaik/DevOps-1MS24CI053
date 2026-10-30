@@ -6,11 +6,11 @@
 
 | # | Screenshot file | Status | What it proves / remaining action |
 |---|---|---|---|
-| 1 | `C1-01-git-history.png` | PENDING | The GitHub `main` history was inspected and shows earlier feature and contributing merges; only `main` currently exists as a remote branch. Save a genuine screenshot of the current branch list and merge history. The current local assignment folder is not committed to that history. |
+| 1 | `C1-01-git-history.png` | PENDING | Local `main` now contains merge `a962cf8` from feature branch `feature/devops-rubric` (`15340e2`), but those commits are not pushed to GitHub. Push both branches, then save a genuine screenshot of the remote branch list and merge history. |
 | 2 | `C1-02-jenkins-config.png` | BLOCKED | No Jenkins installation or job configuration is available. Install/configure Jenkins, the source repository, SCM polling, and pipeline definition, then capture the job configuration. |
 | 3 | `C1-03-jenkins-success.png` | BLOCKED | No Jenkins build has run. Capture the real console output only after a successful build. |
 | 4 | `C1-04-artifact.png` | BLOCKED | No Jenkins artifact has been archived. Capture the artifact link on a successful build page after the pipeline archives it. |
-| 5 | `C1-05-ci-enhancement.png` | PENDING | The Maven suite passed (3 tests, 0 failures) and the pipeline defines commit-SHA artifact naming. Capture actual test results or the versioned Jenkins artifact after running it. |
+| 5 | `C1-05-ci-enhancement.png` | PENDING | The Maven suite passed (3 tests, 0 failures); Jenkins defines commit-SHA artifact naming and `.github/workflows/ci.yml` runs build/tests and uploads a SHA-named artifact. Push the workflow and capture a successful GitHub Actions run or Jenkins artifact. |
 
 ## Component 2 — Ansible, Docker and Kubernetes
 
@@ -35,5 +35,5 @@
 ## Verified without a saved screenshot
 
 - `.\mvnw.cmd -B -q clean package` completed successfully from the project folder; all 3 automated tests passed, with no failures or errors.
-- The fetched GitHub remote is the expected repository, and `origin/main` contains earlier merge commits. The local assignment changes remain uncommitted in a nested, untracked folder.
+- Local `main` has a real feature commit and merge commit, but both are still ahead of `origin/main` and need to be pushed for remote evidence.
 - No screenshots are currently present in `report/screenshots/`.
